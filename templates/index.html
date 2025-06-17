@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bland AI Voice Chat</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-right: 10px;
+    }
+    #log {
+      margin-top: 20px;
+      white-space: pre-line;
+      border: 1px solid #ddd;
+      padding: 10px;
+      min-height: 100px;
+      background: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <h2>Bland AI Voice Assistant</h2>
+  <button onclick="startConversation()">Start Conversation</button>
+  <button onclick="stopRecognition()">Stop</button>
+  <div id="log"></div>
+
+  <script>
+    let recognition;
+    let chatId = null;
+
+    function startConversation() {
+      fetch('/start', { method: 'POST' })
+        .then(response => response.json())
+        .then(data => {
+          if (data.chat_id) {
+            chatId = data.chat_id;
+            logMessage("🎤 Chat started! Speak now...");
+            startRecognition();
+          } else {
+            logMessage("❌ Failed to start chat: " + data.details);
+          }
+        });
+    }
+
+    function startRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert("Your browser does not support Speech Recognition.");
+        return;
+      }
+
+      recognition = new SpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.interimResults = false;
+      recognition.continuous = false;
+
+      recognition.onresult = function(event) {
+        const transcript = event.results[0][0].transcript;
+        logMessage("🗣️ You: " + transcript);
+        sendToBland(transcript);
+      };
+
+      recognition.onerror = function(event) {
+      };
+
+      recognition.onend = function() {
+        if (chatId) {
+            setTimeout(() => recognition.start(), 500);// restart for continuous listening
+        }
+      };
+
+      recognition.start();
+    }
+
+    function stopRecognition() {
+      if (recognition) {
+        recognition.stop();
+        chatId = null;
+        logMessage("🛑 Stopped listening.");
+      }
+    }
+
+    function sendToBland(message) {
+      fetch('/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: message,
+          chat_id: chatId
+        })
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.reply) {
+          logMessage("🤖 Bland: " + data.reply);
+          speak(data.reply);
+        } else {
+          logMessage("❌ Error from Bland: " + data.details);
+        }
+      });
+    }
+
+    function speak(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      speechSynthesis.speak(utterance);
+    }
+
+    function logMessage(message) {
+      const log = document.getElementById("log");
+      log.textContent += message + "\n";
+      log.scrollTop = log.scrollHeight;
+    }
+  </script>
+</body>
+</html>
