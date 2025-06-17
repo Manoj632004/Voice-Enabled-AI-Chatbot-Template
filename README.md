@@ -10,6 +10,9 @@ A reusable Flask template that integrates Bland AI’s conversational pathways w
 5. Response is spoken back to the user in a female voice.
 6. Loop continues until stopped.
 
+![WhatsApp Image 2025-06-17 at 22 32 54](https://github.com/user-attachments/assets/5f3353eb-0743-4fbb-8b85-8d491fb79f9b)
+
+
 ## 🔧 Setup Instructions
 
 ### 1. Clone the repository
