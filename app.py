@@ -2,11 +2,9 @@ from flask import Flask, render_template, request, jsonify
 import requests
 app = Flask(__name__)
 
-BLAND_API_KEY = "org_0de3d7712bc8fd1d901cf963d9ceb441cc302e41aafac0d8bfbae2800737e911cf5398dc6c6d2c5ac7d169"
-PATHWAY_ID = "43daae1b-3cd9-4ba9-8726-a01cd8079cb4"
-BLAND_API_URL = "https://us.api.bland.ai/v1/pathway/chat/36b0bbd5-5efa-43a3-82a6-07a07a19f74e"
-#chatid = 36b0bbd5-5efa-43a3-82a6-07a07a19f74e
-START_NODE_ID = "0e82b9e0-be7a-4acf-88f6-9db6312b401a"
+BLAND_API_KEY = "YOUR_API_KEY"
+PATHWAY_ID = "YOUR_PATHWAY_ID"
+START_NODE_ID = "YOUR_START_NODE_ID"
 @app.route('/')
 def index():
     return render_template('index.html')
