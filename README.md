@@ -36,10 +36,3 @@ BLAND_API_KEY = "your_bland_ai_api_key"
 python app.py
 ```
 
-## ✨ Features
-
-- 🔁 Real-time voice interaction
-- 🧠 Connects to Bland AI chat pathways
-- 🗨️ Speaks responses back using browser’s Text-to-Speech
-- 🧩 Modular Flask backend
-- 🌐 Simple and clean HTML front-end
