@@ -1,7 +1,7 @@
 # Voice-Enabled-AI-Chatbot-Template
 A reusable Flask template that integrates Bland AI’s conversational pathways with voice-based interaction in the browser. Transcribes user speech, sends it to Bland AI, and speaks the AI's response back
 
-## 🚀 How It Works
+## How It Works
 
 1. User clicks "Start".
 2. Browser captures microphone input.
@@ -13,7 +13,7 @@ A reusable Flask template that integrates Bland AI’s conversational pathways w
 ![WhatsApp Image 2025-06-17 at 22 32 54](https://github.com/user-attachments/assets/5f3353eb-0743-4fbb-8b85-8d491fb79f9b)
 
 
-## 🔧 Setup Instructions
+## Setup Instructions
 
 ### 1. Clone the repository
 
