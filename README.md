@@ -18,7 +18,7 @@ A reusable Flask template that integrates Bland AI’s conversational pathways w
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/voice-chatbot-bland-flask.git
+git clone https://github.com/Manoj632004/Voice-Enabled-AI-Chatbot-Template
 cd voice-chatbot-bland-flask
 ```
 
